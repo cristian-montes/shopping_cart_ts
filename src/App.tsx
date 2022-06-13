@@ -2,8 +2,9 @@ import { useState } from "react";
 import { useQuery } from "react-query";
 
 // Components
-import { Drawer, LinearProgress, Grid, Badge } from "@mui/material";
+import { Grid, LinearProgress} from "@mui/material";
 import { AddShoppingCart } from "@mui/icons-material";
+import Item from "./Item/Item";
 
 //Styles
 import { Wrapper } from "./App.styles";
@@ -30,7 +31,7 @@ const  App = () => {
 
   const getTotalItems = () => null;
 
-  const handleAddToCart = () => null;
+  const handleAddToCart = (clickedItem: CartItemType) => null;
 
   const handleRemoveFromCart = () => null;
 
@@ -39,9 +40,15 @@ const  App = () => {
   if(error)  return <div>Something went wrong ....</div>
 
   return (
-    <div className="App">
-      Start
-    </div>
+    <Wrapper>
+      <Grid container spacing={40}>
+        {data?.map( item => (
+          <Grid item key={item.id} xs={12} sm={4}>
+            <Item item={item} handleAddToCart={handleAddToCart} />
+          </Grid>
+        ))}
+      </Grid>
+    </Wrapper>
   );
 }
 
